@@ -64,3 +64,6 @@ df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
 df.boxplot(column='population', by='continent')
 plt.show()
 
+
+## After the 11/03 GitHub operation
+
