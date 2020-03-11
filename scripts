@@ -1,3 +1,66 @@
 """ 
-Pyton beneficial scripts while working on data frames
+Python beneficial scripts while working cleaning and understanding data 
 """
+
+# To import pandas and load the dataframe
+import pandas as pd
+df = pd.read_csv('literary_birth_rate.csv')
+
+# To check first and last rows of your dataframe
+df.head()
+df.tail()
+  
+# check the columns of your dataframe - be careful of column names with spaces and rename them
+df.columns
+df.rename(columns = {'test':'TEST'}, inplace = True)
+
+# check the shape of the data frame -  for example if its a dataset that has countries and if 
+# the row number is less than all countries on world it can give an idea
+df.shape
+
+# get the info of your data frame - column names types how many null rows in each column
+# you have to handle this missing data
+# some columns may have numeric values and can be stored as object (string)
+df.info()
+
+# round to two decimal places in python pandas 
+pd.options.display.float_format = '{:.2f}'.format
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
+# Format with commas and round off to two decimal places in pandas 
+pd.options.display.float_format = '{:, .2f}'.format
+
+# Format with dollars, commas and round off 
+# to two decimal places in pandas 
+pd.options.display.float_format = '${:, .2f}'.format
+
+# formatting date data in your data frame
+df["Date"] = df["Date"].dt.strftime("%m-%d-%Y")
+
+# columns should be analyzed regarding unique values and frequency analysis
+# continent column has 49 rows as AF value seems Africa continent appears 
+# 49 times at the dataset - drop = False helps to count missing values
+# Sweden country appears twice which is probably an error
+df.continent.value_counts(dropna=False)
+df['continent'].value_counts(dropna=False)
+df.country.value_counts(dropna=False).head()
+
+# calculate summary statistics on our numeric data also very helpful. Outliers can be detected
+# and it need further investigation to handle. Not all outliers are bad data points some can be
+# error but some can be valid.
+df.describe()
+
+
+# plotting histograms help to see data distribution of continuous data counts
+import matplotlib.pyplot as plt 
+df.population.plot('hist')
+plt.show()
+
+# Plot the histogram
+df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
+
+
+# box plots to visualize summary statistics
+df.boxplot(column='population', by='continent')
+plt.show()
+
