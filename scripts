@@ -65,5 +65,4 @@ df.boxplot(column='population', by='continent')
 plt.show()
 
 
-## After the 11/03 GitHub operation
 
