@@ -6,32 +6,30 @@ Python beneficial scripts while working cleaning and understanding data
 import pandas as pd
 df = pd.read_csv('literary_birth_rate.csv')
 
-# To check first and last rows of your dataframe
+# To check first and last rows of your dataframe this will help you to understand the data roughly.
 df.head()
 df.tail()
   
-# check the columns of your dataframe - be careful of column names with spaces and rename them
+# check the columns of your dataframe - be careful of column names with spaces and rename them if there is a column like that
+# This will be important while you are fetching data by using pandas data manipulation tools.
 df.columns
-df.rename(columns = {'test':'TEST'}, inplace = True)
+df.rename(columns = {'t e s t':'TEST'}, inplace = True)
 
-# check the shape of the data frame -  for example if its a dataset that has countries and if 
-# the row number is less than all countries on world it can give an idea
+# check the shape of the data frame # of cols and rows -  for example if its a dataset that has countries and if 
+# the row number is less than all countries on world it can give an idea about bugs of the dataset.
 df.shape
 
-# get the info of your data frame - column names types how many null rows in each column
-# you have to handle this missing data
-# some columns may have numeric values and can be stored as object (string)
+# get the info of your data frame - column names, types of data on each column, how many null rows in each column etc.
+# you have to handle this missing data - another course about this.
+# some columns may have numeric values and can actually be stored as object (string) so those should be handled.
 df.info()
 
-# round to two decimal places in python pandas 
+# round to two decimal places in python pandas for column values that are big numbers
+# Format with commas and round off to two decimal places in pandas 
 pd.options.display.float_format = '{:.2f}'.format
 pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
-# Format with commas and round off to two decimal places in pandas 
-pd.options.display.float_format = '{:, .2f}'.format
-
-# Format with dollars, commas and round off 
-# to two decimal places in pandas 
+# Format with dollars, commas and round off to two decimal places in pandas 
 pd.options.display.float_format = '${:, .2f}'.format
 
 # formatting date data in your data frame
@@ -45,25 +43,51 @@ df.continent.value_counts(dropna=False)
 df['continent'].value_counts(dropna=False)
 df.country.value_counts(dropna=False).head()
 
-# calculate summary statistics on our numeric data also very helpful. Outliers can be detected
-# and it need further investigation to handle. Not all outliers are bad data points some can be
-# error but some can be valid.
+# calculate summary statistics on our numeric (only numeric columns!!!) data also very helpful. 
+# Outliers can be detected and it need further investigation to handle.
+# Not all outliers are bad data points some can be error but some can be valid.
 df.describe()
 
 
-# plotting histograms help to see data distribution of continuous data counts
+# !!! histogramlari cidirirken x ve y axislerin isimlendirilmesi veri kutularinin aralklarinin set edilmesi vs. kodlari eklenmeli
+
+# plotting histograms help to see data distribution of continuous data counts - bar plots are used for discrete data!!!
+# helps us to look at frequencies of our data. Histogram how many sorularina cevap vermemiz konusunda bize kolaylik saglar.
+# verininin rakamsal olarak nasi dagildigi hangi deger araliklarinda kac adet veri noktasi bulundugunu gormemizi saglar.
 import matplotlib.pyplot as plt 
 df.population.plot('hist')
 plt.show()
 
-# Plot the histogram
+# Plot the histogram - logx logy true helps to scale the data values to meaningfully show on histogram
 df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
+# If you find a problem on your data (like outliars) u can slice the data and check the problem.
+df[df.pooulation > 1000000000]
 
-
-# box plots to visualize summary statistics
+# box plots to visualize summary statistics - box plot veri noktalarinin degersel olarak nasil dagildigi konsunda bize destek olur
+# medyani bir cirpida bulmamizi, veri kumesinin ne derece daginink oldugunu gormemizi ve outliarlari bulmamizi saglar.
 df.boxplot(column='population', by='continent')
 plt.show()
 
+# scatter plots are used to show relationship between 2 numeric columns - used for identifying bad data.
+# 
 
-## Firat is working at home Turkey :) 15/03/2020
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
